@@ -1,0 +1,88 @@
+1.less能做什么？
+    变量：定义通用样式，在需要的时候调用
+        @color:##4D926F 
+    混合：可以将一个定义好的class A 轻松的引入到另一个class B中从而实现继承，还可以带参数的调用
+    嵌套规则：可以在一个选择器中嵌套另一个选择器实现继承
+    函数与运算：提供加减乘除，操作属性值的办法
+    在客户端的使用:
+        引入 less文件 <link rel="stylesheet/less" type="text/css" href="styles.less">
+        下载并引入less.js
+2.less 在服务器端的运用
+    （1）安装less :npm install -g less
+    （2）编译less文件：lessc index.c > index.css
+    （3）grunt:使用见：https://github.com/gruntjs/grunt-contrib-less
+3.less在客户端的使用：
+    （1）在客户端使用 Less.js 是最容易的方式，并且在开发阶段很方便，但是，在生产环境中，性能和可靠性非常重要，我们建议最好使用 node.js 或其它第三方工具进行预编译。   
+    （2）.less文件的引用：
+        <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    （3）下载less.js,引入less.js:
+        <script src="less.js" type="text/javascript"></script>
+    注意：.less文件是大都编译的，各文件之间的变量不可访问
+    （4）引入less.js之前，定义全局的less对象就可以为less.js，设置less参数
+    <!-- set options before less.js script -->
+        <script>
+  less = {
+    env: "development",
+    async: false,
+    fileAsync: false,
+    poll: 1000,
+    functions: {},
+    dumpLineNumbers: "comments",
+    relativeUrls: false,
+    rootpath: ":/a.com/"
+  };
+        </script>
+        <script src="less.js"></script>
+4.less用法：
+    （1）函数：
+        <1>杂项函数：
+            color: 
+                参数：string类型，颜色字符串
+                返回值：color
+                example:color(#aaa);
+                result:#aaa
+            image-size:
+            image-width:
+
+        (2)变量：@变量名 example : @color:#aee;
+                也可以把变量名定义为变量:example ：@key1:"the key one";@second:"key1"; content:@@second;  output:the key one;
+        (3)混合：
+        定义一个类，将这个类运用到以其他的地方
+            example:
+                .test(@radius:5px){
+                    -moz-border-radius: @radius;
+                    -webkit-border-radius: @radius;
+                    border-radius: @radius;
+                }
+                .zxl{
+                    .test;
+                }
+        (4)嵌套规则：针对多层元素的样式
+            .zx{
+                float:left;
+                h1{
+                    color:read;
+                    font-size:18px;
+                }
+                a{
+                    text-decoratoion:none;
+                    &:hover{
+                        text-decoration:underline;
+                    }
+                }
+            }
+        (5)functions 和 Operations:
+        (6)命名空间：可以用来封装一些公共部分，写成一个库，需要的时候调用
+        (7)变量的范围：less变量也像其他语言一样具有作用范围，首先先检索自身有没有此变量，然后再检索父元素
+        (8)less的注解：
+
+
+
+
+
+
+
+
+
+
+
